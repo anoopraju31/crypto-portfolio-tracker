@@ -79,7 +79,43 @@ const addToPortfolio = asyncHandler(async (req, res) => {
 // @route PUT /api/portfolio/:id
 // @access private
 const editPortfolio = asyncHandler(async (req, res) => {
-	const id = req.params.id
+	const { token, quantity, invested } = req.body
+	// console.log(token, quantity, invested)
+
+	if (!token || !quantity || !invested) {
+		res.status(400)
+		throw new Error('All fields are mandatory!')
+	}
+
+	if (req.user) {
+		if (req.user.portfolio === undefined) {
+			res.status(400)
+			throw new Error('User Portfolio not found')
+		} else {
+			Portfolio.findById(req.user.portfolio).then((portfolio) => {
+				const selectedToken = portfolio.tokens.find(
+					(crypto) => crypto.token === token,
+				)
+
+				if (!selectedToken) {
+					res.status(400)
+					throw new Error('Token not found')
+				} else {
+					selectedToken.quantity = +quantity
+					selectedToken.investedAmount = +invested
+					portfolio.tokens[token] = selectedToken
+					portfolio.save()
+					res
+						.status(200)
+						.json({ message: 'token added to portfolio', portfolio })
+				}
+			})
+		}
+	} else {
+		res.status(404)
+		throw new Error('User Not Found!')
+	}
+
 	const updatePortfolio = await Portfolio.findByIdAndUpdate(id, req.body, {
 		new: true,
 	})
@@ -90,7 +126,6 @@ const editPortfolio = asyncHandler(async (req, res) => {
 // @route PUT /api/portfolio/:id
 // @access private
 const deleteFromPortfolio = asyncHandler(async (req, res) => {
-	const id = req.params.id
 	const portfolioToBeDeleted = await Portfolio.findById(id)
 
 	if (!portfolioToBeDeleted) {
