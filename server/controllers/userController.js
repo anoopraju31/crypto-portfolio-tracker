@@ -1,10 +1,30 @@
 const asyncHandler = require('express-async-handler')
+const {
+	validName,
+	validEmail,
+	validPassword,
+} = require('../variables/utillFunction')
+const User = require('../models/userModel')
 
 // @desc Register new user
 // @route POST /api/user/register
 // @access public
 const registerUser = asyncHandler(async (req, res) => {
-	res.status(200).json({ message: 'user register' })
+	const { name, email, password } = req.body
+	let isValidName = validName(name)
+	let isValidEmail = validEmail(email)
+	let isValidPassword = validPassword(password)
+
+	if (!isValidName || !isValidEmail || !isValidPassword) {
+		res.status(400)
+		let errorText = `please enter a valid ${
+			isValidName ? 'name' : isValidEmail ? 'email' : 'password'
+		}!`
+		throw new Error(errorText)
+	}
+
+	const user = await User.create({ name, email, password })
+	res.status(200).json({ user })
 })
 
 // @desc Login user
