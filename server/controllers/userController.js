@@ -102,7 +102,26 @@ const userProfile = asyncHandler(async (req, res) => {
 // @route PUT /api/user/profile
 // @access private
 const userProfileUpdate = asyncHandler(async (req, res) => {
-	res.status(200).json({ message: 'user profile update' })
+	const { name, email, password } = req.body
+	const user = await User.findOne(req.user._id)
+
+	if (user) {
+		if (name !== undefined && validName(name)) user.name = name
+		if (email !== undefined && validEmail(email)) user.email = email
+		if (password !== undefined && validPassword(password))
+			user.password = password
+
+		const updatedUser = await user.save()
+
+		res.status(201).json({
+			_id: updatedUser._id,
+			name: updatedUser.name,
+			email: updatedUser.email,
+		})
+	} else {
+		res.status(404)
+		throw new Error('User Not Found!')
+	}
 })
 
 module.exports = {
