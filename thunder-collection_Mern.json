@@ -1,0 +1,153 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Mern",
+    "dateExported": "2023-07-10T11:15:54.259Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "b12554b0-4788-4ca1-8746-0f9d2ec8c15d",
+            "name": "api/users",
+            "containerId": "",
+            "created": "2023-06-05T07:35:08.978Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "2b53c5b8-cacd-442d-8a57-5b5b2e897a3a",
+            "colId": "8b8f2883-8bb5-4e2d-8868-2bb168d71a46",
+            "containerId": "b12554b0-4788-4ca1-8746-0f9d2ec8c15d",
+            "name": "auth user",
+            "url": "http://localhost:8000/api/users/auth",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-06-05T07:35:20.897Z",
+            "modified": "2023-06-09T13:56:13.230Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "email",
+                        "value": "salyraju1967@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "aqwsedrf"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "4e689311-713c-4c62-8768-6e2190875b8b",
+            "colId": "8b8f2883-8bb5-4e2d-8868-2bb168d71a46",
+            "containerId": "b12554b0-4788-4ca1-8746-0f9d2ec8c15d",
+            "name": "register user",
+            "url": "http://localhost:8000/api/users/register",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-06-05T07:36:02.947Z",
+            "modified": "2023-06-09T13:33:15.730Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Saly Raju"
+                    },
+                    {
+                        "name": "email",
+                        "value": "salyraju1967@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "aqwsedrf"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "f985f0d8-da44-4cfd-8f86-46cb4773c84c",
+            "colId": "8b8f2883-8bb5-4e2d-8868-2bb168d71a46",
+            "containerId": "b12554b0-4788-4ca1-8746-0f9d2ec8c15d",
+            "name": "logout user",
+            "url": "http://localhost:8000/api/users/logout",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-06-05T07:37:09.904Z",
+            "modified": "2023-06-05T07:37:16.475Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "07005f9b-8b8e-41ef-a8d8-fc66e60b2118",
+            "colId": "8b8f2883-8bb5-4e2d-8868-2bb168d71a46",
+            "containerId": "b12554b0-4788-4ca1-8746-0f9d2ec8c15d",
+            "name": "get user profile",
+            "url": "http://localhost:8000/api/users/profile",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-06-05T07:37:35.536Z",
+            "modified": "2023-06-09T13:41:19.828Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "6b75faeb-6ee3-41f1-b583-42f38b9fe39b",
+            "colId": "8b8f2883-8bb5-4e2d-8868-2bb168d71a46",
+            "containerId": "b12554b0-4788-4ca1-8746-0f9d2ec8c15d",
+            "name": "update user profile",
+            "url": "http://localhost:8000/api/users/profile?name=Saly Philp&email&password",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2023-06-05T07:37:55.583Z",
+            "modified": "2023-06-09T15:09:16.499Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "name",
+                    "value": "Saly Philp",
+                    "isPath": false
+                },
+                {
+                    "name": "email",
+                    "value": "",
+                    "isPath": false
+                },
+                {
+                    "name": "password",
+                    "value": "",
+                    "isPath": false
+                }
+            ],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Saly Philp"
+                    },
+                    {
+                        "name": "email",
+                        "value": ""
+                    },
+                    {
+                        "name": "password",
+                        "value": ""
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ]
+}
