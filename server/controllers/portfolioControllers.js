@@ -14,9 +14,29 @@ const getPortfolio = asyncHandler(async (req, res) => {
 // @route GET /api/portfolio/:id
 // @access private
 const getPortfolioByToken = asyncHandler(async (req, res) => {
-	const id = req.params.id
-	const portfolio = await Portfolio.findById(id)
-	res.status(200).json({ message: `portfolio get ${id}`, portfolio })
+	if (req.user) {
+		Portfolio.findById(req.user.portfolio).then((portfolio) => {
+			if (!portfolio) {
+				res.status(400)
+				throw new Error('Portfolio not found')
+			}
+
+			const token = portfolio.tokens.find(
+				(crypto) => crypto.token === req.params.token,
+			)
+
+			// console.log(portfolio.tokens)
+			if (token) {
+				res.status(200).json(token)
+			} else {
+				res.status(400)
+				throw new Error('Token not found')
+			}
+		})
+	} else {
+		res.status(400)
+		throw new Error('User Not Found!')
+	}
 })
 
 // @desc Add a token to portfolio

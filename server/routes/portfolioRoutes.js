@@ -11,7 +11,7 @@ const router = express.Router()
 
 router.route('/').get(protect, getPortfolio).post(protect, addToPortfolio)
 router
-	.route('/:id')
+	.route('/:token')
 	.get(protect, getPortfolioByToken)
 	.put(protect, editPortfolio)
 	.delete(protect, deleteFromPortfolio)
