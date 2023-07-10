@@ -12,6 +12,7 @@ const port = process.env.PORT || 5000
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(bodyparser.json())
 
+app.use('/api/user', require('./routes/userRoutes'))
 app.use('/api/portfolio', require('./routes/portfolioRoutes'))
 app.use(errorHandler)
 
