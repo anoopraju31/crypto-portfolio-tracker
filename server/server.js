@@ -16,6 +16,7 @@ app.use(cookieParser())
 
 app.use('/api/user', require('./routes/userRoutes'))
 app.use('/api/portfolio', require('./routes/portfolioRoutes'))
+app.use('/api/watchlist', require('./routes/watchlistRoutes'))
 app.use(errorHandler)
 
 app.listen(port, () => {
