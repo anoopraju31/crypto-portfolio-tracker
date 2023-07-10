@@ -17,6 +17,14 @@ const getPortfolioByToken = (req, res) => {
 // @route POST /api/portfolio
 // @access for time being public
 const addToPortfolio = (req, res) => {
+	const { token, quantity, invested } = req.body
+	// console.log(token, quantity, invested)
+
+	if (!token || !quantity || !invested) {
+		res.status(400)
+		throw new Error('All fields are mandatory!')
+	}
+
 	res.status(200).json({ message: 'portfolio post' })
 }
 
