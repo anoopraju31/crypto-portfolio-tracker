@@ -8,10 +8,11 @@ const {
 } = require('../controllers/portfolioControllers.js')
 const router = express.Router()
 
-router.route('/').get(getPortfolio)
-router.route('/:id').get(getPortfolioByToken)
-router.route('/').post(addToPortfolio)
-router.route('/:id').put(editPortfolio)
-router.route('/:id').delete(deleteFromPortfolio)
+router.route('/').get(getPortfolio).post(addToPortfolio)
+router
+	.route('/:id')
+	.get(getPortfolioByToken)
+	.put(editPortfolio)
+	.delete(deleteFromPortfolio)
 
 module.exports = router
