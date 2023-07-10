@@ -115,28 +115,43 @@ const editPortfolio = asyncHandler(async (req, res) => {
 		res.status(404)
 		throw new Error('User Not Found!')
 	}
-
-	const updatePortfolio = await Portfolio.findByIdAndUpdate(id, req.body, {
-		new: true,
-	})
-	res.status(200).json({ message: `portfolio put ${id}`, updatePortfolio })
 })
 
 // @desc Delete a token from portfolio
 // @route PUT /api/portfolio/:id
 // @access private
 const deleteFromPortfolio = asyncHandler(async (req, res) => {
-	const portfolioToBeDeleted = await Portfolio.findById(id)
+	if (req.user) {
+		if (req.user.portfolio === undefined) {
+			res.status(400)
+			throw new Error('User Portfolio not found')
+		} else {
+			Portfolio.findById(req.user.portfolio).then((portfolio) => {
+				const tokens = portfolio.tokens
 
-	if (!portfolioToBeDeleted) {
+				const searchingToken = tokens.find(
+					(crypto) => crypto.token === req.params.token,
+				)
+
+				if (!searchingToken) {
+					res.status(400)
+					throw new Error('Token Not Found')
+				} else {
+					const filteredTokens = tokens.filter(
+						(token) => token !== searchingToken,
+					)
+					portfolio.tokens = filteredTokens
+					portfolio.save()
+					res
+						.status(200)
+						.json({ message: 'token deleted from portfolio', searchingToken })
+				}
+			})
+		}
+	} else {
 		res.status(404)
-		throw new Error('Portfolio Not Found!')
+		throw new Error('User Not Found!')
 	}
-
-	await Portfolio.deleteOne({ _id: id })
-	res
-		.status(200)
-		.json({ message: `portfolio delete ${id}`, portfolioToBeDeleted })
 })
 
 module.exports = {
