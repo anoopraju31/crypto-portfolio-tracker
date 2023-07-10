@@ -6,8 +6,19 @@ const User = require('../models/userModel')
 // @route GET /api/portfolio
 // @access private
 const getPortfolio = asyncHandler(async (req, res) => {
-	const portfolio = await Portfolio.findById(req.user.portfolio)
-	res.status(200).json({ message: 'portfolio get', portfolio })
+	if (req.user) {
+		const portfolio = await Portfolio.findById(req.user.portfolio)
+
+		if (!portfolio) {
+			res.status(400)
+			throw new Error('Portfolio not found!')
+		} else {
+			res.status(200).json({ message: 'portfolio get', portfolio })
+		}
+	} else {
+		res.status(400)
+		throw new Error('User Not Found!')
+	}
 })
 
 // @desc Get a specific token from portfolio
