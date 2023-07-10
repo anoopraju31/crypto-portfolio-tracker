@@ -85,7 +85,17 @@ const logoutUser = asyncHandler(async (req, res) => {
 // @route GET /api/user/profile
 // @access private
 const userProfile = asyncHandler(async (req, res) => {
-	res.status(200).json({ message: 'user profile' })
+	console.log(req)
+	if (req.user) {
+		res.status(200).json({
+			id: req.user._id,
+			name: req.user.name,
+			email: req.user.email,
+		})
+	} else {
+		res.status(404)
+		throw new Error('User Not Found!')
+	}
 })
 
 // @desc User profile

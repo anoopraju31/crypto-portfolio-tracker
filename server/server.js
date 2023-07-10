@@ -10,8 +10,8 @@ connectToDB()
 const app = express()
 const port = process.env.PORT || 5000
 
-app.use(bodyparser.urlencoded({ extended: true }))
-app.use(bodyparser.json())
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use('/api/user', require('./routes/userRoutes'))
