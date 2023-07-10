@@ -5,6 +5,7 @@ const {
 	validPassword,
 } = require('../variables/utillFunction')
 const User = require('../models/userModel')
+const generateToken = require('../variables/generateToken')
 
 // @desc Register new user
 // @route POST /api/user/register
@@ -31,7 +32,19 @@ const registerUser = asyncHandler(async (req, res) => {
 	}
 
 	const user = await User.create({ name, email, password })
-	res.status(200).json({ user })
+
+	if (user) {
+		generateToken(res, user._id)
+
+		res.status(201).json({
+			id: user._id,
+			name: user.name,
+			email: user.email,
+		})
+	} else {
+		res.status(400)
+		throw new Error('Invalid User Data')
+	}
 })
 
 // @desc Login user
@@ -42,6 +55,8 @@ const loginUser = asyncHandler(async (req, res) => {
 	const user = await User.findOne({ email })
 
 	if (user && (await user.matchPassword(password))) {
+		generateToken(res, user._id)
+
 		res.status(200).json({
 			_id: user._id,
 			name: user.name,
