@@ -1,18 +1,33 @@
 const mongoose = require('mongoose')
 
-const portfolioSchema = new mongoose.Schema({
-	token: {
-		type: String,
-		required: [true, 'Please add the token name'],
+const tokenSchema = mongoose.Schema(
+	{
+		token: {
+			type: String,
+			unique: true,
+			required: [true, 'Please add the token name'],
+		},
+		quantity: {
+			type: Number,
+			required: [true, 'Please add the quantity of tokens'],
+		},
+		investedAmount: {
+			type: Number,
+			required: [true, 'Please add the invested amount'],
+		},
 	},
-	quantity: {
-		type: Number,
-		required: [true, 'Please add the quantity of tokens'],
+	{
+		timestamps: true,
 	},
-	investedAmount: {
-		type: Number,
-		required: [true, 'Please add the invested amount'],
+)
+
+const portfolioSchema = mongoose.Schema({
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+		ref: 'users',
 	},
+	tokens: [tokenSchema],
 })
 
-module.exports = mongoose.model('portfolio', portfolioSchema)
+module.exports = mongoose.model('portfolios', portfolioSchema)

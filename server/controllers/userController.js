@@ -85,12 +85,14 @@ const logoutUser = asyncHandler(async (req, res) => {
 // @route GET /api/user/profile
 // @access private
 const userProfile = asyncHandler(async (req, res) => {
-	console.log(req)
+	// console.log(req)
 	if (req.user) {
+		console.log(req.user.portfolio)
 		res.status(200).json({
 			id: req.user._id,
 			name: req.user.name,
 			email: req.user.email,
+			portfolio: req.user.portfolio,
 		})
 	} else {
 		res.status(404)
@@ -110,8 +112,6 @@ const userProfileUpdate = asyncHandler(async (req, res) => {
 		if (email !== undefined && validEmail(email)) user.email = email
 		if (password !== undefined && validPassword(password))
 			user.password = password
-
-		const updatedUser = await user.save()
 
 		res.status(201).json({
 			_id: updatedUser._id,

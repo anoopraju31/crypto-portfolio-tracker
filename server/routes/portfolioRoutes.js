@@ -6,13 +6,14 @@ const {
 	editPortfolio,
 	deleteFromPortfolio,
 } = require('../controllers/portfolioControllers.js')
+const protect = require('../middlewares/authHandler.js')
 const router = express.Router()
 
-router.route('/').get(getPortfolio).post(addToPortfolio)
+router.route('/').get(protect, getPortfolio).post(protect, addToPortfolio)
 router
 	.route('/:id')
-	.get(getPortfolioByToken)
-	.put(editPortfolio)
-	.delete(deleteFromPortfolio)
+	.get(protect, getPortfolioByToken)
+	.put(protect, editPortfolio)
+	.delete(protect, deleteFromPortfolio)
 
 module.exports = router

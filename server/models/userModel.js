@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		portfolio: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'portfolios',
+		},
 	},
 	{
 		timestamps: true,
