@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { Login, Register } from './pages'
+import { Home, Login, Register } from './pages'
 
 export const router = createBrowserRouter([
 	{
@@ -9,5 +9,9 @@ export const router = createBrowserRouter([
 	{
 		path: '/register',
 		element: <Register />,
+	},
+	{
+		path: '/',
+		element: <Home />,
 	},
 ])
