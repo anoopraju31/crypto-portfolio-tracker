@@ -6,11 +6,7 @@ const Register = () => {
 	const passwordRef = useRef()
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(
-			nameRef.current.value,
-			emailRef.current.value,
-			passwordRef.current.value,
-		)
+
 		nameRef.current.value = ''
 		emailRef.current.value = ''
 		passwordRef.current.value = ''
