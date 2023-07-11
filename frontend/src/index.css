@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --login-page-height: calc(100vh - 56px);
+    --register-page-height: calc(100vh - 56px);
+}

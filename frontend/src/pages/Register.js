@@ -13,7 +13,7 @@ const Register = () => {
 		passwordRef.current.value = ''
 	}
 	return (
-		<div className='container min-h-screen mx-auto px-4 flex justify-center items-center'>
+		<div className='container h-[var(--register-page-height)] mx-auto px-4 flex justify-center items-center'>
 			<div className='relative flex flex-col rounded-xl bg-transparent bg-clip-border text-gray-700 shadow-none'>
 				<h4 className='block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased'>
 					Sign Up
