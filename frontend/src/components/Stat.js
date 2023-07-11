@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Stat = () => {
+const Stat = ({ title, value, color }) => {
 	return (
-		<div className='flex flex-col items-center'>
+		<div className={`flex flex-col items-center ${color ? color : ''}`}>
 			<div className='flex justify-between'>
-				<h3 className='font-medium'> Current Value </h3>
+				<h3 className='font-medium'> {title} </h3>
 			</div>
 
 			<div className='my-2'>
-				<h2 className='text-4xl font-bold'> USD 24,456 </h2>
+				<h2 className='text-4xl font-bold'> {value} </h2>
 			</div>
 		</div>
 	)
