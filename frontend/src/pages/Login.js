@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
 	const emailRef = useRef()
@@ -52,11 +53,11 @@ const Login = () => {
 					</button>
 					<p className='mt-4 block text-center font-sans text-base font-normal leading-relaxed text-gray-700 antialiased'>
 						Not registered yet?{'  '}
-						<a
-							className='font-medium text-blue-600 transition-colors hover:text-blue-700'
-							href='/'>
-							Sign up
-						</a>
+						<Link to='/register'>
+							<span className='font-medium text-blue-600 transition-colors hover:text-blue-700'>
+								Sign Up
+							</span>
+						</Link>
 					</p>
 				</form>
 			</div>
