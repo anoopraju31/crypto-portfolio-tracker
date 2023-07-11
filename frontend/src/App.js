@@ -1,8 +1,8 @@
 import React from 'react'
-import { Login } from './pages'
+import { Register } from './pages'
 
 const App = () => {
-	return <Login />
+	return <Register />
 }
 
 export default App
